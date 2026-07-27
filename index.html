@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depósito CERO — Archivo de Agua</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   DEPÓSITO CERO — Estilos generales
+   Fondo: blanco · Acento: #00FF5A
+═══════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --verde: #00FF5A;
+  --negro: #1a1a1a;
+  --blanco: #ffffff;
+  --gris: #f4f4f2;
+  --fuente: 'Courier Prime', 'Courier New', monospace;
+}
+
+body {
+  background: var(--blanco);
+  color: var(--negro);
+  font-family: var(--fuente);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border-bottom: none;
+  transition: background .3s ease, border-color .3s ease;
+}
+header.scrolled {
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--negro);
+}
+
+.header-brand {
+  color: var(--verde);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color .3s;
+}
+.header-brand:hover { color: var(--blanco); }
+header.scrolled .header-brand { color: var(--negro); }
+header.scrolled .header-brand:hover { color: var(--verde); }
+
+.menu-nav-btn {
+  background: none;
+  border: 1.5px solid var(--blanco);
+  color: var(--blanco);
+  font-size: 10px;
+  font-family: var(--fuente);
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  padding: 6px 12px;
+  transition: background .2s, color .2s, border-color .3s;
+}
+.menu-nav-btn:hover { background: var(--blanco); color: var(--negro); }
+header.scrolled .menu-nav-btn { border-color: var(--negro); color: var(--negro); }
+header.scrolled .menu-nav-btn:hover { background: var(--negro); color: var(--blanco); }
+.menu-toggle {
+  background: none;
+  border: 1.5px solid var(--blanco);
+  color: var(--blanco);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 6px 14px;
+  font-family: var(--fuente);
+  line-height: 1;
+  transition: background .2s, color .2s, border-color .3s;
+}
+.menu-toggle:hover { background: var(--blanco); color: var(--negro); }
+header.scrolled .menu-toggle { border-color: var(--negro); color: var(--negro); }
+header.scrolled .menu-toggle:hover { background: var(--negro); color: var(--blanco); }
+
+/* nav dropdown */
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: 57px; right: 32px;
+  background: var(--blanco);
+  border: 1.5px solid var(--negro);
+  flex-direction: column;
+  min-width: 240px;
+  box-shadow: 4px 4px 0 var(--negro);
+}
+.nav-menu.open { display: flex; }
+
+.nav-menu a,
+.nav-submenu-toggle {
+  color: var(--negro);
+  text-decoration: none;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(26,26,26,.15);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  text-align: left;
+  width: 100%;
+  font-family: var(--fuente);
+  transition: background .15s;
+  display: block;
+}
+.nav-menu a:last-child { border-bottom: none; }
+.nav-menu a:hover,
+.nav-submenu-toggle:hover { background: var(--negro); color: var(--blanco); }
+
+.submenu { display: none; flex-direction: column; }
+.submenu.open { display: flex; }
+.submenu a {
+  padding-left: 36px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(26,26,26,.1);
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #111;
+}
+
+.carousel-wrap {
+  position: absolute;
+  inset: 0;
+}
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.slide.active { opacity: 1; }
+.slide img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* overlay sutil sobre las fotos */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.18);
+  z-index: 1;
+}
+
+/* text */
+.hero-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  width: 90%;
+}
+
+.typing-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.typing-title {
+  font-size: 96px;
+  font-weight: 700;
+  color: var(--verde);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  line-height: 1;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.25);
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 5px;
+  height: 96px;
+  background: var(--verde);
+  animation: blink .7s step-end infinite;
+  flex-shrink: 0;
+}
+@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+
+
+/* dots */
+.hero-dots {
+  position: absolute;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 2;
+}
+.dot {
+  width: 10px; height: 10px;
+  border: 1.5px solid var(--blanco);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background .3s;
+}
+.dot.active { background: var(--blanco); }
+
+/* ── SHARED CONTENT ── */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+h1 {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  color: var(--negro);
+}
+h2 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  margin-top: 52px;
+  color: var(--negro);
+}
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: var(--negro);
+}
+p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: #3a3a3a;
+  margin-bottom: 14px;
+}
+
+/* concept box */
+.box {
+  border: 1.5px solid var(--negro);
+  padding: 28px 32px;
+  margin: 24px 0;
+}
+.box h3 { margin-bottom: 12px; }
+
+/* ── GALERÍA PROCESO ── */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border: 1.5px solid var(--negro);
+  background: var(--gris);
+  cursor: pointer;
+}
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+.gallery-item:hover img { transform: scale(1.04); }
+.gallery-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: var(--negro);
+  color: var(--blanco);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  padding: 8px 12px;
+  text-transform: uppercase;
+  transform: translateY(100%);
+  transition: transform .3s ease;
+}
+.gallery-item:hover .gallery-caption { transform: translateY(0); }
+
+/* ── SOBRE ── */
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 3fr 1.5fr;
+  gap: 60px;
+  align-items: start;
+}
+.ubicaciones-list p {
+  border-bottom: 1px solid rgba(26,26,26,.15);
+  padding: 10px 0;
+  margin: 0;
+  font-size: 13px;
+}
+.ubicaciones-list p strong { color: var(--negro); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 2px; }
+
+/* ── MAPA ── */
+.mapa-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  margin-top: 32px;
+}
+#map {
+  height: 520px;
+  border: 1.5px solid var(--negro);
+  background: var(--gris);
+}
+.puntos-lista { overflow-y: auto; max-height: 520px; }
+.punto {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(26,26,26,.15);
+  cursor: pointer;
+  transition: background .15s;
+}
+.punto:hover { background: rgba(0,255,90,.08); }
+.punto h4 { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.punto p { font-size: 11px; margin: 2px 0; color: #666; }
+.punto a { font-size: 11px; color: var(--negro); text-decoration: underline; }
+.punto a:hover { color: var(--verde); }
+
+/* ── GENERADOR ── */
+.form-wrap { max-width: 600px; }
+.form-group { margin-bottom: 24px; }
+.form-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--negro);
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--negro);
+  background: var(--blanco);
+  font-family: var(--fuente);
+  font-size: 14px;
+  color: var(--negro);
+  outline: none;
+  transition: border-color .2s;
+}
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--verde); }
+.form-group textarea { resize: vertical; min-height: 90px; }
+.coords-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-note { font-size: 11px; color: #888; margin-top: 5px; letter-spacing: .3px; }
+.upload-area {
+  border: 1.5px dashed var(--negro);
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: background .15s, border-color .2s;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.upload-area:hover { background: rgba(0,255,90,.06); border-color: var(--verde); }
+.audio-preview { margin-top: 12px; padding: 12px; border: 1px solid rgba(26,26,26,.2); display: none; }
+audio { width: 100%; margin-top: 8px; }
+.btn-submit {
+  background: var(--negro);
+  color: var(--blanco);
+  border: none;
+  padding: 14px 32px;
+  font-size: 13px;
+  font-family: var(--fuente);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  transition: background .2s;
+}
+.btn-submit:hover { background: var(--verde); color: var(--negro); }
+.success-msg {
+  display: none;
+  margin-top: 16px;
+  padding: 16px 20px;
+  border: 1.5px solid var(--verde);
+  background: rgba(0,255,90,.08);
+  font-size: 13px;
+  letter-spacing: .5px;
+}
+.success-msg.show { display: block; }
+
+/* ── BIOGRAFÍA ── */
+.bio-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.bio-foto {
+  width: 100%;
+  border: 1.5px solid var(--negro);
+  background: var(--gris);
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+.bio-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bio-foto-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #aaa; letter-spacing: 1px; padding: 20px; text-align: center;
+}
+.bio-link {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--negro);
+  font-size: 13px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--negro);
+}
+.bio-link:hover { color: var(--verde); border-color: var(--verde); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--negro);
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .8px;
+  color: #777;
+  margin-top: 60px;
+}
+footer a { color: var(--negro); text-decoration: none; }
+footer a:hover { color: var(--verde); }
+footer p { margin: 2px 0; color: #888; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  header { padding: 14px 20px; }
+  .nav-menu { right: 20px; }
+  .typing-title { font-size: 48px; }
+  .cursor-blink { height: 48px; }
+  main { padding: 60px 20px; }
+  h1 { font-size: 28px; }
+  .sobre-grid, .mapa-grid, .bio-grid { grid-template-columns: 1fr; gap: 32px; }
+  .gallery { grid-template-columns: 1fr; }
+  .coords-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .typing-title { font-size: 32px; }
+  .cursor-blink { height: 32px; width: 3px; }
+}
+
+/* ── SLOTS DE FOTO EN SOBRE ── */
+.sobre-foto-slot {
+  width: 100%;
+  margin: 32px 0;
+  border: 1.5px solid var(--negro);
+  background: var(--gris);
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+}
+.sobre-foto-slot img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 520px;
+}
+.sobre-foto-placeholder {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #aaa;
+  text-transform: uppercase;
+}
+.sobre-foto-slot.empty img { display: none; }
+.sobre-foto-slot.empty .sobre-foto-placeholder { display: flex; }
+
+
+body {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27700%27%20height%3D%27400%27%3E%0A%3Cg%20fill%3D%27none%27%20stroke%3D%27%2523bccfbc%27%20stroke-width%3D%270.85%27%20opacity%3D%270.45%27%3E%0A%3Cpath%20d%3D%27M-10%2C32%20C60%2C24%20140%2C38%20210%2C30%20C280%2C22%20360%2C36%20430%2C28%20C500%2C20%20580%2C34%20650%2C26%20C720%2C18%20760%2C32%20710%2C28%27/%3E%0A%3Cpath%20d%3D%27M-10%2C64%20C50%2C56%20130%2C70%20200%2C62%20C270%2C54%20350%2C68%20420%2C60%20C490%2C52%20570%2C66%20640%2C58%20C710%2C50%20760%2C64%20710%2C60%27/%3E%0A%3Cpath%20d%3D%27M-10%2C96%20C70%2C88%20150%2C102%20220%2C94%20C290%2C86%20370%2C100%20440%2C92%20C510%2C84%20590%2C98%20660%2C90%20C730%2C82%20760%2C96%20710%2C92%27/%3E%0A%3Cpath%20d%3D%27M-10%2C128%20C55%2C120%20135%2C134%20205%2C126%20C275%2C118%20355%2C132%20425%2C124%20C495%2C116%20575%2C130%20645%2C122%20C715%2C114%20760%2C128%20710%2C124%27/%3E%0A%3Cpath%20d%3D%27M-10%2C160%20C65%2C152%20145%2C166%20215%2C158%20C285%2C150%20365%2C164%20435%2C156%20C505%2C148%20585%2C162%20655%2C154%20C725%2C146%20760%2C160%20710%2C156%27/%3E%0A%3Cpath%20d%3D%27M-10%2C192%20C75%2C184%20155%2C198%20225%2C190%20C295%2C182%20375%2C196%20445%2C188%20C515%2C180%20595%2C194%20665%2C186%20C735%2C178%20760%2C192%20710%2C188%27/%3E%0A%3Cpath%20d%3D%27M-10%2C224%20C60%2C216%20140%2C230%20210%2C222%20C280%2C214%20360%2C228%20430%2C220%20C500%2C212%20580%2C226%20650%2C218%20C720%2C210%20760%2C224%20710%2C220%27/%3E%0A%3Cpath%20d%3D%27M-10%2C256%20C68%2C248%20148%2C262%20218%2C254%20C288%2C246%20368%2C260%20438%2C252%20C508%2C244%20588%2C258%20658%2C250%20C728%2C242%20760%2C256%20710%2C252%27/%3E%0A%3Cpath%20d%3D%27M-10%2C288%20C72%2C280%20152%2C294%20222%2C286%20C292%2C278%20372%2C292%20442%2C284%20C512%2C276%20592%2C290%20662%2C282%20C732%2C274%20760%2C288%20710%2C284%27/%3E%0A%3Cpath%20d%3D%27M-10%2C320%20C62%2C312%20142%2C326%20212%2C318%20C282%2C310%20362%2C324%20432%2C316%20C502%2C308%20582%2C322%20652%2C314%20C722%2C306%20760%2C320%20710%2C316%27/%3E%0A%3Cpath%20d%3D%27M-10%2C352%20C78%2C344%20158%2C358%20228%2C350%20C298%2C342%20378%2C356%20448%2C348%20C518%2C340%20598%2C354%20668%2C346%20C738%2C338%20760%2C352%20710%2C348%27/%3E%0A%3Cpath%20d%3D%27M-10%2C384%20C66%2C376%20146%2C390%20216%2C382%20C286%2C374%20366%2C388%20436%2C380%20C506%2C372%20586%2C386%20656%2C378%20C726%2C370%20760%2C384%20710%2C380%27/%3E%0A%3Cline%20x1%3D%27175%27%20y1%3D%270%27%20x2%3D%27175%27%20y2%3D%27400%27%20stroke-width%3D%270.6%27/%3E%0A%3Cline%20x1%3D%27350%27%20y1%3D%270%27%20x2%3D%27350%27%20y2%3D%27400%27%20stroke-width%3D%270.6%27/%3E%0A%3Cline%20x1%3D%27525%27%20y1%3D%270%27%20x2%3D%27525%27%20y2%3D%27400%27%20stroke-width%3D%270.6%27/%3E%0A%3Cpath%20d%3D%27M-10%2C180%20C100%2C130%20220%2C90%20340%2C68%20C460%2C46%20580%2C24%20720%2C4%27%20stroke-width%3D%270.6%27/%3E%0A%3Cpath%20d%3D%27M-10%2C280%20C100%2C230%20220%2C190%20340%2C168%20C460%2C146%20580%2C124%20720%2C104%27%20stroke-width%3D%270.6%27/%3E%0A%3Cpath%20d%3D%27M-10%2C380%20C100%2C330%20220%2C290%20340%2C268%20C460%2C246%20580%2C224%20720%2C204%27%20stroke-width%3D%270.6%27/%3E%0A%3C/g%3E%0A%3C/svg%3E");
+  background-size: 700px 400px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+
+/* Semitransparencia en main y footer para legibilidad */
+main { background: rgba(255,255,255,0.84); }
+footer { background: rgba(255,255,255,0.90); }
+/* El hero cubre el fondo con sus fotos — no necesita ajuste */
+
+/* ── MÁS VERDE EN TÍTULOS ── */
+h1 { color: var(--verde); }
+h2 { color: var(--negro); border-bottom: 2px solid var(--verde); padding-bottom: 8px; }
+h3 { color: var(--negro); }
+
+/* Punto verde en ubicaciones */
+.ubicaciones-list p strong {
+  color: var(--verde);
+  font-size: 11px;
+}
+
+/* Ficha del mapa: nombre en verde */
+.punto h4 { color: var(--verde); }
+
+/* Número en label de campo verde */
+.ficha-field-value-green { color: var(--verde); font-weight: 700; }
+
+/* Proceso: numero de foto en verde */
+.gallery-caption { background: var(--verde); color: var(--negro); }
+
+/* Bio: nombre principal en verde */
+.bio-name { color: var(--verde); }
+
+/* Generador: label verde */
+.form-group label { color: var(--verde); }
+
+/* Sección label pequeño verde */
+.ficha-section-label { color: var(--verde); }
+
+/* Box border verde */
+.box { border-color: var(--verde); }
+.box h3 { color: var(--verde); }
+
+
+/* ── LIGHTBOX ── */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0,0,0,.92);
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+#lightbox.open { display: flex; }
+#lightbox-img {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border: 2px solid var(--verde);
+  box-shadow: 0 0 60px rgba(0,255,90,.15);
+}
+#lightbox-caption {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--fuente);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--verde);
+  text-transform: uppercase;
+  background: rgba(0,0,0,.6);
+  padding: 6px 16px;
+}
+#lightbox-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  font-size: 28px;
+  color: var(--blanco);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--fuente);
+  line-height: 1;
+  opacity: .7;
+  transition: opacity .15s, color .15s;
+}
+#lightbox-close:hover { opacity: 1; color: var(--verde); }
+.gallery-item { cursor: zoom-in; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header>
+  <a href="#biografia" class="header-brand" onclick="showSection('biografia')">Martín Fernández Navarro</a>
+  <button class="menu-toggle" id="menuBtn" aria-label="Menú">☰</button>
+  <nav class="nav-menu" id="navMenu">
+    <a href="#inicio" onclick="showSection('inicio');closeNav()">INICIO</a>
+    <button class="nav-submenu-toggle" id="bottleToggle">▼ BOTELLAS</button>
+    <div class="submenu" id="bottleSubmenu">
+      <a href="botellas/arroyo-solis-grande.html">Arroyo Solís Grande</a>
+      <a href="botellas/laguna-del-sauce.html">Laguna del Sauce</a>
+      <a href="botellas/playa-solis.html">Playa Solís</a>
+      <a href="botellas/afluente-las-flores.html">Afluente Las Flores</a>
+      <a href="botellas/cuneta-ruta-9.html">Cuneta Ruta 9</a>
+      <a href="botellas/canada-de-aparicio.html">Cañada de Aparicio</a>
+      <a href="botellas/playa-brava-jose-ignacio.html">Playa Brava, José Ignacio</a>
+      <a href="botellas/laguna-garzon.html">Laguna Garzón</a>
+    </div>
+    <a href="#sobre" onclick="showSection('sobre');closeNav()">SOBRE EL PROYECTO</a>
+    <a href="#mapa" onclick="showSection('mapa');initMap();closeNav()">MAPA</a>
+    <a href="#proceso" onclick="showSection('proceso');closeNav()">PROCESO</a>
+    <a href="#generador" onclick="showSection('generador');closeNav()">GENERADOR</a>
+    <a href="#biografia" onclick="showSection('biografia');closeNav()">BIOGRAFÍA</a>
+  </nav>
+</header>
+
+<!-- ═══════════ SECCIÓN: INICIO / HERO ═══════════ -->
+<section id="sec-inicio">
+  <div class="hero">
+    <div class="carousel-wrap" id="carousel">
+      <!-- ▼▼▼ FOTOS HERO — reemplazar src cuando las tengas ▼▼▼ -->
+      <div class="slide active"><img src="assets/fotos-hero/foto1.jpg" alt="Recolección 1"></div>
+      <div class="slide"><img src="assets/fotos-hero/foto2.jpg" alt="Recolección 2"></div>
+      <div class="slide"><img src="assets/fotos-hero/foto3.jpg" alt="Recolección 3"></div>
+      <div class="slide"><img src="assets/fotos-hero/foto4.jpg" alt="Recolección 4"></div>
+      <!-- ▲▲▲ -->
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <div class="typing-wrap">
+        <h1 class="typing-title" id="typingTitle"></h1>
+        <span class="cursor-blink" id="cursor"></span>
+      </div>
+
+    </div>
+    <div class="hero-dots" id="heroDots">
+      <div class="dot active" onclick="goSlide(0)"></div>
+      <div class="dot" onclick="goSlide(1)"></div>
+      <div class="dot" onclick="goSlide(2)"></div>
+      <div class="dot" onclick="goSlide(3)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SECCIÓN: SOBRE ═══════════ -->
+<section id="sec-sobre" style="display:none; padding-top:57px;">
+  <main>
+    <h1>Depósito Cero</h1>
+    <div class="sobre-grid">
+      <article>
+        <h2>Sobre el proyecto</h2>
+        <p>En 1968, el artista argentino Nicolás García Uriburu tiñó el Gran Canal de Venecia de verde fluorescente. Fue un gesto de protesta ambiental que repitió en ríos y canales de distintas partes del mundo. Menos conocido es otro gesto suyo: guardó parte de esa agua coloreada en botellas, que hoy son piezas de museo.</p>
+        <p>Depósito Cero parte de ahí. No de la coloración, sino de la recolección y el archivo. Si Uriburu tiñó el agua para denunciar su contaminación, este proyecto la recolecta para imaginar un futuro en el que ya no esté disponible. Un depósito de emergencia construido con agua de ocho cuerpos distintos del departamento de Maldonado — arroyos, lagunas, cañadas, el océano frente a la zona donde se autorizó exploración sísmica en 2025.</p>
+
+        <!-- ▼▼▼ FOTO 1 — reemplazar src con tu imagen ▼▼▼ -->
+        <div class="sobre-foto-slot">
+          <img src="assets/fotos/sobre-foto1.jpg" alt="Depósito Cero"
+            onerror="this.parentElement.classList.add('empty')">
+          <div class="sobre-foto-placeholder">[ Foto 1 — agregar imagen ]</div>
+        </div>
+        <!-- ▲▲▲ -->
+
+        <p>La recolección se planteó como un road trip, no como una serie de visitas rápidas. Ir a cada lugar, quedarse el tiempo necesario, conocerlo un poco antes de sacar una muestra. Eso permitió notar diferencias que no aparecen en un mapa: qué agua bebe la gente, qué agua se usa para el turismo, qué agua corre invisible al costado de una ruta, qué agua le corresponde a quién.</p>
+        <p>El otro desafío del proyecto fue de orden visual. El paisaje costero de Maldonado está hiperfotografiado — cualquier imagen nueva compite con miles que ya existen, y en general pierde. La respuesta no fue buscar mejores fotos, sino enrarecer las que ya había: intervenir, fragmentar, dejar que el paisaje conocido se vuelva un poco extraño, para que se lo pueda mirar de nuevo en lugar de solo reconocerlo.</p>
+
+        <!-- ▼▼▼ FOTO 2 — reemplazar src con tu imagen ▼▼▼ -->
+        <div class="sobre-foto-slot">
+          <img src="assets/fotos/sobre-foto2.jpg" alt="Depósito Cero"
+            onerror="this.parentElement.classList.add('empty')">
+          <div class="sobre-foto-placeholder">[ Foto 2 — agregar imagen ]</div>
+        </div>
+        <!-- ▲▲▲ -->
+
+        <p>El resultado es un archivo que no pretende salvar nada. Guardar agua en botellas no resuelve la escasez ni la amenaza de la prospección petrolera — la solución real está en otro lugar, en la organización colectiva. Depósito Cero muestra el gesto ingenuo de querer conservar, precisamente para señalar, por contraste, lo que hace falta hacer.</p>
+        <div class="box" style="margin-top:32px;">
+          <p style="text-align:right; font-style:italic; margin:0; color:#555;">Martín Fernández Navarro, 2026</p>
+        </div>
+
+        <h2>Diálogos Conceptuales</h2>
+        <div class="box">
+          <h3>García Uriburu</h3>
+          <p>Nicolás García Uriburu utilizaba tintura verde para teñir ríos en varios países. Su gesto era interventor, visible, molesto. El agua se volvía arte-denuncia, un acto público que no se podía ignorar.</p>
+        </div>
+        <div class="box">
+          <h3>Depósito Cero (2026)</h3>
+          <p>En lugar de intervenir el agua en su contexto natural, Fernández Navarro la extrae, la guarda, la archiva. El gesto es pasivo, conservador, archivístico. La botella es el museo, y el archivo reemplaza la acción.</p>
+        </div>
+      </article>
+
+      <aside>
+        <h2>8 Ubicaciones</h2>
+        <div class="ubicaciones-list">
+          <p><strong>001 — Arroyo Solís Grande</strong>Límite Canelones / Maldonado</p>
+          <p><strong>002 — Playa Solís</strong>Océano Atlántico</p>
+          <p><strong>003 — Afluente Las Flores</strong>Curso de agua interior</p>
+          <p><strong>004 — Cuneta Ruta 9</strong>Agua de infraestructura vial</p>
+          <p><strong>005 — Cañada de Aparicio</strong>Curso de agua natural</p>
+          <p><strong>006 — Laguna Garzón</strong>Laguna costera</p>
+          <p><strong>007 — Playa Brava, José Ignacio</strong>Océano Atlántico</p>
+          <p><strong>008 — Laguna del Sauce</strong>Agua potable de Maldonado</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <footer>
+    <p><a href="https://www.instagram.com/martinnavarro.art/" target="_blank">DEPÓSITO CERO — Martín Fernández Navarro</a></p>
+    <p>Museo Colección García Uriburu, Maldonado, Uruguay · Hasta el 5 de diciembre del 2026</p>
+  </footer>
+</section>
+
+<!-- ═══════════ SECCIÓN: MAPA ═══════════ -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<section id="sec-mapa" style="display:none; padding-top:57px;">
+  <main>
+    <h1>Mapa de Recolecciones</h1>
+    <p>Los 8 puntos de recolección de agua en Maldonado.</p>
+    <div class="mapa-grid">
+      <div id="map"></div>
+      <div class="puntos-lista">
+        <div class="punto"><h4>Arroyo Solís Grande</h4><p>05/12/2026 — 07:45</p><a href="botellas/arroyo-solis-grande.html">Ver botella 001 →</a></div>
+        <div class="punto"><h4>Playa Solís</h4><p>05/12/2026 — 10:15</p><a href="botellas/playa-solis.html">Ver botella 002 →</a></div>
+        <div class="punto"><h4>Afluente Las Flores</h4><p>05/12/2026 — 14:21</p><a href="botellas/afluente-las-flores.html">Ver botella 003 →</a></div>
+        <div class="punto"><h4>Cuneta Ruta 9</h4><p>11/12/2026 — 17:22</p><a href="botellas/cuneta-ruta-9.html">Ver botella 004 →</a></div>
+        <div class="punto"><h4>Cañada de Aparicio</h4><p>11/12/2026 — 15:18</p><a href="botellas/canada-de-aparicio.html">Ver botella 005 →</a></div>
+        <div class="punto"><h4>Laguna Garzón</h4><p>11/12/2026 — 07:58</p><a href="botellas/laguna-garzon.html">Ver botella 006 →</a></div>
+        <div class="punto"><h4>Playa Brava, José Ignacio</h4><p>11/12/2026 — 11:41</p><a href="botellas/playa-brava-jose-ignacio.html">Ver botella 007 →</a></div>
+        <div class="punto"><h4>Laguna del Sauce</h4><p>05/12/2026 — 17:15</p><a href="botellas/laguna-del-sauce.html">Ver botella 008 →</a></div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p><a href="https://www.instagram.com/martinnavarro.art/" target="_blank">DEPÓSITO CERO — Martín Fernández Navarro</a></p>
+    <p>Museo Colección García Uriburu, Maldonado, Uruguay · Hasta el 5 de diciembre del 2026</p>
+  </footer>
+</section>
+
+<!-- ═══════════ SECCIÓN: PROCESO ═══════════ -->
+<section id="sec-proceso" style="display:none; padding-top:57px;">
+  <main>
+    <h1>Proceso de Recolección</h1>
+    <p>Documentación fotográfica del proceso de recolección de agua en los 8 lugares. Registro del mameluco verde y el gesto de extracción.</p>
+
+    <div class="gallery">
+      <!-- ▼▼▼ FOTOS PROCESO — reemplazar src cuando las tengas ▼▼▼ -->
+      <div class="gallery-item" onclick="openLightbox('assets/fotos/arroyo solis.JPG','001 — Arroyo Solís Grande')">
+        <img src="assets/fotos/arroyo solis.JPG" alt="Arroyo Solís Grande">
+        <div class="gallery-caption">001 — Arroyo Solís Grande</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('assets/fotos/playa solis.png','002 — Playa Solís')">
+        <img src="assets/fotos/playa solis.png" alt="Playa Solís">
+        <div class="gallery-caption">002 — Playa Solís</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('assets/fotos/las flores.png','003 — Afluente Las Flores')">
+        <img src="assets/fotos/las flores.png" alt="Afluente Las Flores">
+        <div class="gallery-caption">003 — Afluente Las Flores</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('assets/fotos/ruta 9.JPG','004 — Cuneta Ruta 9')">
+        <img src="assets/fotos/ruta 9.JPG" alt="Cuneta Ruta 9">
+        <div class="gallery-caption">004 — Cuneta Ruta 9</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('assets/fotos/aparicio.JPG','005 — Cañada de Aparicio')">
+        <img src="assets/fotos/aparicio.JPG" alt="Cañada de Aparicio">
+        <div class="gallery-caption">005 — Cañada de Aparicio</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('assets/fotos/laguna del sacue.JPG','008 — Laguna del Sauce')">
+        <img src="assets/fotos/laguna del sacue.JPG" alt="Laguna del Sauce">
+        <div class="gallery-caption">008 — Laguna del Sauce</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('assets/fotos/playa brava jose ignacio .JPG','007 — Playa Brava, José Ignacio')">
+        <img src="assets/fotos/playa brava jose ignacio .JPG" alt="Playa Brava">
+        <div class="gallery-caption">007 — Playa Brava, José Ignacio</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox('assets/fotos/laguna garzon.JPG','006 — Laguna Garzón')">
+        <img src="assets/fotos/laguna garzon.JPG" alt="Laguna Garzón">
+        <div class="gallery-caption">006 — Laguna Garzón</div>
+      </div>
+      <!-- ▲▲▲ -->
+    </div>
+
+    <h2>Notas sobre el Proceso</h2>
+    <div class="box">
+      <h3>El Mameluco Verde como Identidad Performática</h3>
+      <p>El artista utilizó un mameluco de trabajo de color verde croma durante todas las recolecciones. El verde que tiñe y el verde que borra se vuelven una sola cosa.</p>
+    </div>
+    <div class="box">
+      <h3>La Recolección como Ritual</h3>
+      <p>Cada extracción de agua sigue un protocolo: llegar al lugar, documentar coordenadas GPS, registrar hora y temperatura, grabar audio ambiente, tomar fotos, llenar la botella de vidrio. Un ritual metódico, archivístico.</p>
+    </div>
+    <div class="box">
+      <h3>Escala y Absurdo</h3>
+      <p>8 botellas para 8 lugares — una cantidad ridícula de agua comparada con los millones de litros que fluyen continuamente. La solución equivocada como reflejo de nuestra parálisis.</p>
+    </div>
+  </main>
+  <footer>
+    <p><a href="https://www.instagram.com/martinnavarro.art/" target="_blank">DEPÓSITO CERO — Martín Fernández Navarro</a></p>
+    <p>Museo Colección García Uriburu, Maldonado, Uruguay · Hasta el 5 de diciembre del 2026</p>
+  </footer>
+</section>
+
+<!-- ═══════════ SECCIÓN: GENERADOR ═══════════ -->
+<section id="sec-generador" style="display:none; padding-top:57px;">
+  <main>
+    <h1>Generador de Etiquetas</h1>
+    <p style="max-width:640px; margin-bottom:40px;">Depósito CERO es un proyecto abierto. Cualquiera puede participar cargando un audio grabado en un lugar específico. El generador crea una etiqueta con tus datos: coordenadas GPS, audio, metadatos. Es tu agua. Tu voz. Tu archivo.</p>
+
+    <div class="form-wrap">
+      <form id="genForm">
+        <div class="form-group">
+          <label>Audio del lugar (MP3, WAV, OGG)</label>
+          <div class="upload-area" id="uploadArea">
+            Arrastrá tu archivo aquí o hacé clic para seleccionar
+          </div>
+          <input type="file" id="audioFile" accept="audio/*" style="display:none">
+          <div class="audio-preview" id="audioPreview">
+            <audio controls id="audioPlayer"></audio>
+            <p class="form-note" id="audioName"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nombre del lugar *</label>
+          <input type="text" id="lugar" placeholder="Ej: Arroyo San José" required>
+          <p class="form-note">¿Dónde grabaste el audio?</p>
+        </div>
+        <div class="form-group">
+          <label>Descripción</label>
+          <textarea id="descripcion" placeholder="Describe el lugar, los sonidos, la atmósfera..."></textarea>
+          <p class="form-note">Opcional · máx. 500 caracteres</p>
+        </div>
+        <div class="form-group">
+          <label>Coordenadas GPS *</label>
+          <div class="coords-grid">
+            <div>
+              <input type="number" id="lat" placeholder="Latitud" step="0.0001" required>
+              <p class="form-note">Latitud</p>
+            </div>
+            <div>
+              <input type="number" id="lng" placeholder="Longitud" step="0.0001" required>
+              <p class="form-note">Longitud</p>
+            </div>
+          </div>
+          <p class="form-note">Podés usar Google Maps o una app de GPS</p>
+        </div>
+        <div class="form-group">
+          <label>Tu nombre / seudónimo</label>
+          <input type="text" id="nombre" placeholder="¿Quién sos?">
+        </div>
+        <div class="form-group">
+          <label>Email (opcional)</label>
+          <input type="email" id="email" placeholder="tu@email.com">
+        </div>
+        <button type="submit" class="btn-submit">Generar etiqueta</button>
+        <div class="success-msg" id="successMsg">
+          ✓ Etiqueta creada. Tu aporte ha sido registrado. Gracias por participar en Depósito CERO.
+        </div>
+      </form>
+    </div>
+
+    <h2>Instrucciones</h2>
+    <div class="box"><h3>1. Grabá un audio</h3><p>Entre 30 segundos y 5 minutos. Puede ser sonido ambiente, agua fluyendo, el viento. Lo que escuchés, archivalo.</p></div>
+    <div class="box"><h3>2. Anotá las coordenadas</h3><p>Abrí Google Maps, buscá el lugar exacto y copiá las coordenadas.</p></div>
+    <div class="box"><h3>3. Completá el formulario</h3><p>Cargá el audio, el nombre del lugar y las coordenadas.</p></div>
+    <div class="box"><h3>¿Qué pasa con mis datos?</h3><p>Todos los audios y coordenadas son públicos y forman parte de la obra. Es un archivo de arte, no una base de datos comercial.</p></div>
+  </main>
+  <footer>
+    <p><a href="https://www.instagram.com/martinnavarro.art/" target="_blank">DEPÓSITO CERO — Martín Fernández Navarro</a></p>
+    <p>Museo Colección García Uriburu, Maldonado, Uruguay · Hasta el 5 de diciembre del 2026</p>
+  </footer>
+</section>
+
+<!-- ═══════════ SECCIÓN: BIOGRAFÍA ═══════════ -->
+<section id="sec-biografia" style="display:none; padding-top:57px;">
+  <main>
+    <div class="bio-grid">
+      <div>
+        <div class="bio-foto">
+          <!-- ▼▼▼ FOTO BIO — reemplazar src cuando la tengas ▼▼▼ -->
+          <img src="assets/fotos/biografia.jpg" alt="Martín Fernández Navarro" onerror="this.parentElement.innerHTML='<div class=\'bio-foto-placeholder\'>[ Foto de Martín Fernández Navarro ]</div>'">
+          <!-- ▲▲▲ -->
+        </div>
+      </div>
+      <div>
+        <h1>Martín Fernández Navarro</h1>
+        <p>Artista e investigador radicado entre Montevideo y Madrid. Su práctica se sitúa en el cruce entre cuerpo, tecnología e imagen, desarrollando proyectos que exploran sistemas artificiales de sostén, repetición y desgaste.</p>
+        <p>Desarrolla líneas de trabajo como <strong>Después del jardín</strong>, un proyecto expositivo-performático que indaga en la imposibilidad de retorno a lo natural; <strong>Recursos Humanos</strong>, donde aborda el cuerpo en relación a lógicas de trabajo monótono y repetitivo; y <strong>Ciborga</strong>, una pieza que imagina un futuro atravesado por el avance tecnológico.</p>
+        <p>Su investigación se despliega en formatos performáticos, expositivos y de videoperformance, con interés en estados de intensidad sostenida, acciones repetitivas y cuerpos llevados al límite.</p>
+        <p>Ha presentado trabajos en el Círculo de Bellas Artes de Madrid, el Centro Cultural de España en Montevideo, y otros contextos en Uruguay, España, Brasil y México.</p>
+        <p>Actualmente presenta <strong>Depósito Cero</strong> en el Museo García Uriburu (Maldonado), una exposición instalativa que aborda la prospección sísmica marina y el agua como territorio en disputa.</p>
+        <p style="margin-top:24px;">
+          <a href="https://www.instagram.com/martinnavarro.art/" target="_blank" class="bio-link">@martinnavarro.art</a>
+        </p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p><a href="https://www.instagram.com/martinnavarro.art/" target="_blank">DEPÓSITO CERO — Martín Fernández Navarro</a></p>
+    <p>Museo Colección García Uriburu, Maldonado, Uruguay · Hasta el 5 de diciembre del 2026</p>
+  </footer>
+</section>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* ── HEADER TRANSPARENTE — se vuelve sólido al scrollear ── */
+const hdr = document.querySelector('header');
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// También cuando cambiamos de sección: si no es inicio, el header siempre sólido
+function updateHeader(id) {
+  if (id === 'inicio') {
+    hdr.classList.toggle('scrolled', window.scrollY > 60);
+  } else {
+    hdr.classList.add('scrolled');
+  }
+}
+
+/* ── NAVEGACIÓN ── */
+const sections = ['inicio','sobre','mapa','proceso','generador','biografia'];
+let currentSection = 'inicio';
+
+function showSection(id) {
+  sections.forEach(s => {
+    document.getElementById('sec-'+s).style.display = (s===id) ? 'block' : 'none';
+  });
+  currentSection = id;
+  window.scrollTo(0,0);
+  updateHeader(id);
+}
+
+function closeNav() {
+  document.getElementById('navMenu').classList.remove('open');
+}
+
+document.getElementById('menuBtn').addEventListener('click', () => {
+  document.getElementById('navMenu').classList.toggle('open');
+});
+
+document.getElementById('bottleToggle').addEventListener('click', () => {
+  document.getElementById('bottleSubmenu').classList.toggle('open');
+});
+
+// Cerrar menú al clickear fuera
+document.addEventListener('click', e => {
+  const nav = document.getElementById('navMenu');
+  const btn = document.getElementById('menuBtn');
+  if (!nav.contains(e.target) && !btn.contains(e.target)) {
+    nav.classList.remove('open');
+  }
+});
+
+/* ── CARRUSEL HERO ── */
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+
+function goSlide(n) {
+  slides[slideIndex].classList.remove('active');
+  dots[slideIndex].classList.remove('active');
+  slideIndex = n % slides.length;
+  slides[slideIndex].classList.add('active');
+  dots[slideIndex].classList.add('active');
+}
+
+let autoSlide = setInterval(() => goSlide(slideIndex + 1), 5000);
+
+/* ── TYPING ANIMATION ── */
+(function() {
+  const title = document.getElementById('typingTitle');
+  const full  = 'DEPÓSITO CERO';
+  let i = 0, errored = false;
+
+  function type() {
+    if (i < full.length) {
+      // error en posición 10 ("DEPÓSITO C")
+      if (i === 10 && !errored) {
+        errored = true;
+        title.textContent += 'X';
+        setTimeout(() => {
+          title.textContent = title.textContent.slice(0,-1);
+          setTimeout(() => {
+            title.textContent += full[i]; i++;
+            setTimeout(type, Math.random()*80+40);
+          }, 200);
+        }, 320);
+        return;
+      }
+      title.textContent += full[i]; i++;
+      setTimeout(type, Math.random()*80+40);
+    }
+
+  }
+  setTimeout(type, 2000);
+})();
+
+/* ── MAPA (Leaflet) ── */
+let mapInitialized = false;
+function initMap() {
+  if (mapInitialized) return;
+  mapInitialized = true;
+  setTimeout(() => {
+    const map = L.map('map').setView([-34.81, -55.05], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap', maxZoom: 19
+    }).addTo(map);
+
+    const locs = [
+      { n:'Arroyo Solís Grande',      lat:-34.78499, lng:-55.39164, url:'botellas/arroyo-solis-grande.html' },
+      { n:'Playa Solís',              lat:-34.79526, lng:-55.38624, url:'botellas/playa-solis.html' },
+      { n:'Afluente Las Flores',      lat:-34.80805, lng:-55.33615, url:'botellas/afluente-las-flores.html' },
+      { n:'Cuneta Ruta 9',            lat:-34.78665, lng:-55.25464, url:'botellas/cuneta-ruta-9.html' },
+      { n:'Cañada de Aparicio',       lat:-34.88940, lng:-54.95665, url:'botellas/canada-de-aparicio.html' },
+      { n:'Laguna Garzón',            lat:-34.80171, lng:-54.57377, url:'botellas/laguna-garzon.html' },
+      { n:'Playa Brava, José Ignacio',lat:-34.83990, lng:-54.63281, url:'botellas/playa-brava-jose-ignacio.html' },
+      { n:'Laguna del Sauce',         lat:-34.84484, lng:-55.10214, url:'botellas/laguna-del-sauce.html' },
+    ];
+
+    locs.forEach(l => {
+      L.marker([l.lat, l.lng]).addTo(map)
+       .bindPopup(`<strong style="font-family:monospace;font-size:12px">${l.n}</strong><br><a href="${l.url}" style="font-family:monospace;font-size:11px;color:#00FF5A">Ver botella →</a>`);
+    });
+  }, 100);
+}
+
+/* ── GENERADOR ── */
+const uploadArea = document.getElementById('uploadArea');
+const audioFile  = document.getElementById('audioFile');
+const audioPreview = document.getElementById('audioPreview');
+const audioPlayer  = document.getElementById('audioPlayer');
+const audioName    = document.getElementById('audioName');
+
+uploadArea.addEventListener('click', () => audioFile.click());
+uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.background='rgba(0,255,90,.08)'; });
+uploadArea.addEventListener('dragleave', () => { uploadArea.style.background=''; });
+uploadArea.addEventListener('drop', e => {
+  e.preventDefault(); uploadArea.style.background='';
+  if (e.dataTransfer.files[0]) loadAudio(e.dataTransfer.files[0]);
+});
+audioFile.addEventListener('change', () => { if (audioFile.files[0]) loadAudio(audioFile.files[0]); });
+
+function loadAudio(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    audioPlayer.src = e.target.result;
+    audioName.textContent = '📁 ' + file.name;
+    audioPreview.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+document.getElementById('genForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const msg = document.getElementById('successMsg');
+  msg.classList.add('show');
+  setTimeout(() => {
+    e.target.reset();
+    audioPreview.style.display = 'none';
+    msg.classList.remove('show');
+  }, 3500);
+});
+</script>
+
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-caption"></div>
+</div>
+
+</body>
+</html>

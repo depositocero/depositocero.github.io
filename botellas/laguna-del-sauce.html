@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botella 008 — Laguna del Sauce — Depósito CERO</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--verde:#00FF5A;--negro:#1a1a1a;--blanco:#ffffff;--gris:#f4f4f2;--fuente:'Courier Prime','Courier New',monospace;}
+body{background:#fff;color:var(--negro);font-family:var(--fuente);line-height:1.6;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27700%27%20height%3D%27400%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%23bccfbc%27%20stroke-width%3D%270.85%27%20opacity%3D%270.45%27%3E%3Cpath%20d%3D%27M-10%2C32%20C60%2C24%20140%2C38%20210%2C30%20C280%2C22%20360%2C36%20430%2C28%20C500%2C20%20580%2C34%20650%2C26%20C720%2C18%20760%2C32%20710%2C28%27/%3E%3Cpath%20d%3D%27M-10%2C64%20C50%2C56%20130%2C70%20200%2C62%20C270%2C54%20350%2C68%20420%2C60%20C490%2C52%20570%2C66%20640%2C58%20C710%2C50%20760%2C64%20710%2C60%27/%3E%3Cpath%20d%3D%27M-10%2C96%20C70%2C88%20150%2C102%20220%2C94%20C290%2C86%20370%2C100%20440%2C92%20C510%2C84%20590%2C98%20660%2C90%20C730%2C82%20760%2C96%20710%2C92%27/%3E%3Cpath%20d%3D%27M-10%2C128%20C55%2C120%20135%2C134%20205%2C126%20C275%2C118%20355%2C132%20425%2C124%20C495%2C116%20575%2C130%20645%2C122%20C715%2C114%20760%2C128%20710%2C124%27/%3E%3Cpath%20d%3D%27M-10%2C160%20C65%2C152%20145%2C166%20215%2C158%20C285%2C150%20365%2C164%20435%2C156%20C505%2C148%20585%2C162%20655%2C154%20C725%2C146%20760%2C160%20710%2C156%27/%3E%3Cpath%20d%3D%27M-10%2C192%20C75%2C184%20155%2C198%20225%2C190%20C295%2C182%20375%2C196%20445%2C188%20C515%2C180%20595%2C194%20665%2C186%20C735%2C178%20760%2C192%20710%2C188%27/%3E%3Cpath%20d%3D%27M-10%2C224%20C60%2C216%20140%2C230%20210%2C222%20C280%2C214%20360%2C228%20430%2C220%20C500%2C212%20580%2C226%20650%2C218%20C720%2C210%20760%2C224%20710%2C220%27/%3E%3Cpath%20d%3D%27M-10%2C256%20C68%2C248%20148%2C262%20218%2C254%20C288%2C246%20368%2C260%20438%2C252%20C508%2C244%20588%2C258%20658%2C250%20C728%2C242%20760%2C256%20710%2C252%27/%3E%3Cpath%20d%3D%27M-10%2C288%20C72%2C280%20152%2C294%20222%2C286%20C292%2C278%20372%2C292%20442%2C284%20C512%2C276%20592%2C290%20662%2C282%20C732%2C274%20760%2C288%20710%2C284%27/%3E%3Cpath%20d%3D%27M-10%2C320%20C62%2C312%20142%2C326%20212%2C318%20C282%2C310%20362%2C324%20432%2C316%20C502%2C308%20582%2C322%20652%2C314%20C722%2C306%20760%2C320%20710%2C316%27/%3E%3Cpath%20d%3D%27M-10%2C352%20C78%2C344%20158%2C358%20228%2C350%20C298%2C342%20378%2C356%20448%2C348%20C518%2C340%20598%2C354%20668%2C346%20C738%2C338%20760%2C352%20710%2C348%27/%3E%3Cpath%20d%3D%27M-10%2C384%20C66%2C376%20146%2C390%20216%2C382%20C286%2C374%20366%2C388%20436%2C380%20C506%2C372%20586%2C386%20656%2C378%20C726%2C370%20760%2C384%20710%2C380%27/%3E%3Cline%20x1%3D%27175%27%20y1%3D%270%27%20x2%3D%27175%27%20y2%3D%27400%27%20stroke-width%3D%270.6%27/%3E%3Cline%20x1%3D%27350%27%20y1%3D%270%27%20x2%3D%27350%27%20y2%3D%27400%27%20stroke-width%3D%270.6%27/%3E%3Cline%20x1%3D%27525%27%20y1%3D%270%27%20x2%3D%27525%27%20y2%3D%27400%27%20stroke-width%3D%270.6%27/%3E%3Cpath%20d%3D%27M-10%2C180%20C100%2C130%20220%2C90%20340%2C68%20C460%2C46%20580%2C24%20720%2C4%27%20stroke-width%3D%270.6%27/%3E%3Cpath%20d%3D%27M-10%2C280%20C100%2C230%20220%2C190%20340%2C168%20C460%2C146%20580%2C124%20720%2C104%27%20stroke-width%3D%270.6%27/%3E%3Cpath%20d%3D%27M-10%2C380%20C100%2C330%20220%2C290%20340%2C268%20C460%2C246%20580%2C224%20720%2C204%27%20stroke-width%3D%270.6%27/%3E%3C/g%3E%3C/svg%3E");
+  background-size:700px 400px;background-repeat:repeat;background-attachment:fixed;}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 32px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.95);border-bottom:1px solid var(--negro);}
+.header-brand{color:var(--negro);font-size:13px;font-weight:700;letter-spacing:1.5px;text-decoration:none;text-transform:uppercase;}
+.header-brand:hover{color:var(--verde);}
+.menu-toggle{background:none;border:1.5px solid var(--negro);color:var(--negro);font-size:18px;cursor:pointer;padding:6px 14px;font-family:var(--fuente);line-height:1;}
+.menu-toggle:hover{background:var(--negro);color:var(--blanco);}
+.nav-menu{display:none;position:absolute;top:57px;right:32px;background:var(--blanco);border:1.5px solid var(--negro);flex-direction:column;min-width:240px;box-shadow:4px 4px 0 var(--negro);}
+.nav-menu.open{display:flex;}
+.nav-menu a,.nav-submenu-toggle{color:var(--negro);text-decoration:none;padding:12px 18px;border-bottom:1px solid rgba(26,26,26,.15);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;text-align:left;width:100%;font-family:var(--fuente);display:block;}
+.nav-menu a:hover,.nav-submenu-toggle:hover{background:var(--negro);color:var(--blanco);}
+.submenu{display:none;flex-direction:column;}
+.submenu.open{display:flex;}
+.submenu a{padding-left:36px;font-size:11px;border-bottom:1px solid rgba(26,26,26,.1);}
+main{max-width:960px;margin:0 auto;padding:100px 40px 80px;background:rgba(255,255,255,.85);}
+footer{border-top:1px solid var(--negro);padding:20px 40px;text-align:center;font-size:11px;letter-spacing:.8px;color:#777;background:rgba(255,255,255,.9);}
+footer a{color:var(--negro);text-decoration:none;}
+footer a:hover{color:var(--verde);}
+footer p{margin:2px 0;}
+.ficha-header{background:var(--verde);color:var(--negro);padding:14px 24px;display:flex;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;}
+.ficha-titulo{font-size:56px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--verde);border-bottom:3px solid var(--negro);padding:24px 0 20px;line-height:1;}
+.ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-left:1px solid rgba(26,26,26,.15);border-right:1px solid rgba(26,26,26,.15);margin-bottom:48px;}
+.ficha-field{padding:20px 24px;border-bottom:1px solid rgba(26,26,26,.15);border-right:1px solid rgba(26,26,26,.12);}
+.ficha-field:nth-child(even){border-right:none;}
+.ficha-field-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:8px;}
+.ficha-field-value{font-size:18px;color:var(--negro);font-weight:700;line-height:1.3;}
+.ficha-field-value.coordinates{font-size:12px;word-break:break-all;color:#555;font-weight:400;letter-spacing:.3px;}
+.ficha-field-value.highlight{color:var(--verde);font-size:28px;}
+.ficha-marca-section{padding:24px;border-bottom:1px solid rgba(26,26,26,.15);display:flex;align-items:center;gap:28px;grid-column:span 2;}
+.ficha-marca-img{width:140px;height:140px;flex-shrink:0;}
+.ficha-marca-img img{width:100%;height:100%;object-fit:contain;}
+.ficha-marca-text h3{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:8px;}
+.ficha-marca-text p{font-size:13px;color:#555;line-height:1.6;margin:0;}
+.carousel-section{border-top:3px solid var(--verde);padding-top:36px;}
+.carousel-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--verde);margin-bottom:20px;}
+.carousel-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.carousel-btn{background:var(--negro);color:var(--blanco);border:none;padding:10px 22px;cursor:pointer;font-size:11px;font-family:var(--fuente);letter-spacing:1.5px;text-transform:uppercase;transition:background .15s;}
+.carousel-btn:hover{background:var(--verde);color:var(--negro);}
+.carousel-count{font-size:12px;color:#888;letter-spacing:1px;}
+.carousel-main{overflow:hidden;background:var(--gris);border:1.5px solid var(--negro);margin-bottom:16px;height:560px;cursor:zoom-in;}
+.carousel-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease;}
+.carousel-main:hover .carousel-img{transform:scale(1.02);}
+.carousel-thumbs{display:flex;gap:8px;flex-wrap:wrap;}
+.carousel-thumb{width:80px;height:80px;border:1.5px solid rgba(26,26,26,.2);cursor:pointer;object-fit:cover;transition:border-color .2s;}
+.carousel-thumb.active{border-color:var(--negro);box-shadow:0 0 0 1px var(--negro);}
+.carousel-thumb:hover{border-color:var(--verde);}
+#lightbox{display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.93);align-items:center;justify-content:center;cursor:zoom-out;}
+#lightbox.open{display:flex;}
+#lightbox-img{max-width:92vw;max-height:88vh;object-fit:contain;border:2px solid var(--verde);}
+#lightbox-close{position:absolute;top:20px;right:24px;font-size:28px;color:#fff;cursor:pointer;background:none;border:none;font-family:var(--fuente);opacity:.7;transition:opacity .15s,color .15s;}
+#lightbox-close:hover{opacity:1;color:var(--verde);}
+@media(max-width:768px){
+  header{padding:14px 20px;}
+  .nav-menu{right:20px;}
+  main{padding:80px 16px 60px;}
+  .ficha-titulo{font-size:32px;}
+  .ficha-grid{grid-template-columns:1fr;}
+  .ficha-field{border-right:none;}
+  .ficha-marca-section{grid-column:span 1;flex-direction:column;align-items:flex-start;}
+  .carousel-main{height:280px;}
+}
+</style>
+</head>
+<body>
+<header>
+  <a href="../index.html" class="header-brand">Martín Fernández Navarro</a>
+  <button class="menu-toggle" id="menuBtn">☰</button>
+  <nav class="nav-menu" id="navMenu">
+    <a href="../index.html">INICIO</a>
+    <button class="nav-submenu-toggle" id="bottleToggle">▼ BOTELLAS</button>
+    <div class="submenu" id="bottleSubmenu">
+      <a href="arroyo-solis-grande.html">Arroyo Solís Grande</a>
+      <a href="laguna-del-sauce.html">Laguna del Sauce</a>
+      <a href="playa-solis.html">Playa Solís</a>
+      <a href="afluente-las-flores.html">Afluente Las Flores</a>
+      <a href="cuneta-ruta-9.html">Cuneta Ruta 9</a>
+      <a href="canada-de-aparicio.html">Cañada de Aparicio</a>
+      <a href="playa-brava-jose-ignacio.html">Playa Brava, José Ignacio</a>
+      <a href="laguna-garzon.html">Laguna Garzón</a>
+    </div>
+    <a href="../index.html#sobre">SOBRE EL PROYECTO</a>
+    <a href="../index.html#mapa">MAPA</a>
+    <a href="../index.html#proceso">PROCESO</a>
+    <a href="../index.html#generador">GENERADOR</a>
+    <a href="../index.html#biografia">BIOGRAFÍA</a>
+  </nav>
+</header>
+<main>
+  <div class="ficha-header">
+    <span>FICHA DE RECOLECCIÓN</span>
+    <span>DEPÓSITO CERO</span>
+  </div>
+  <h1 class="ficha-titulo">Botella de agua Nº 008</h1>
+  <div class="ficha-grid">
+    <div class="ficha-field">
+      <div class="ficha-field-label">Cuerpo de agua</div>
+      <div class="ficha-field-value">Laguna del Sauce</div>
+    </div>
+    <div class="ficha-field">
+      <div class="ficha-field-label">Fecha de extracción</div>
+      <div class="ficha-field-value">05/12/2026 — 17:15</div>
+    </div>
+    <div class="ficha-field">
+      <div class="ficha-field-label">Coordenadas</div>
+      <div class="ficha-field-value coordinates">-34.84484470013897<br>-55.102147467045874</div>
+    </div>
+    <div class="ficha-field">
+      <div class="ficha-field-label">Botellas disponibles</div>
+      <div class="ficha-field-value highlight">9</div>
+    </div>
+    <div class="ficha-marca-section">
+      <div class="ficha-marca-img">
+        <img src="data:image/png;base64,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" alt="Marca Geofónica 008">
+      </div>
+      <div class="ficha-marca-text">
+        <h3>Marca Geofónica</h3>
+        <p>Representación visual del cuerpo de agua. Forma derivada de la cartografía del territorio donde se realizó la extracción.</p>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-section">
+    <div class="carousel-label">Registro fotográfico</div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" onclick="prevPhoto()">← Anterior</button>
+      <span class="carousel-count"><span id="cur">1</span> / 5</span>
+      <button class="carousel-btn" onclick="nextPhoto()">Siguiente →</button>
+    </div>
+    <div class="carousel-main" onclick="openLightbox()">
+      <img src="laguna ddel sauce/IMG_2094.JPG" alt="Foto 1" class="carousel-img" id="mainImg">
+    </div>
+    <div class="carousel-thumbs">
+      <img src="laguna ddel sauce/IMG_2094.JPG" class="carousel-thumb active" onclick="setPhoto(0)" alt="1">
+      <img src="laguna ddel sauce/IMG_2105.JPG" class="carousel-thumb" onclick="setPhoto(1)" alt="2">
+      <img src="laguna ddel sauce/IMG_2114.JPG" class="carousel-thumb" onclick="setPhoto(2)" alt="3">
+      <img src="laguna ddel sauce/IMG_2125.JPG" class="carousel-thumb" onclick="setPhoto(3)" alt="4">
+      <img src="laguna ddel sauce/IMG_2158.JPG" class="carousel-thumb" onclick="setPhoto(4)" alt="5">
+    </div>
+  </div>
+</main>
+<footer>
+  <p><a href="https://www.instagram.com/martinnavarro.art/" target="_blank">DEPÓSITO CERO — Martín Fernández Navarro</a></p>
+  <p>Museo Colección García Uriburu, Maldonado, Uruguay · Hasta el 5 de diciembre del 2026</p>
+</footer>
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+<script>
+document.getElementById('menuBtn').addEventListener('click',()=>{document.getElementById('navMenu').classList.toggle('open');});
+document.getElementById('bottleToggle').addEventListener('click',()=>{document.getElementById('bottleSubmenu').classList.toggle('open');});
+document.addEventListener('click',e=>{const nav=document.getElementById('navMenu'),btn=document.getElementById('menuBtn');if(!nav.contains(e.target)&&!btn.contains(e.target))nav.classList.remove('open');});
+var srcs=['laguna ddel sauce/IMG_2094.JPG', 'laguna ddel sauce/IMG_2105.JPG', 'laguna ddel sauce/IMG_2114.JPG', 'laguna ddel sauce/IMG_2125.JPG', 'laguna ddel sauce/IMG_2158.JPG'],idx=0;
+function setPhoto(i){idx=(i+srcs.length)%srcs.length;document.getElementById('mainImg').src=srcs[idx];document.getElementById('cur').textContent=idx+1;document.querySelectorAll('.carousel-thumb').forEach((t,j)=>t.classList.toggle('active',j===idx));}
+function nextPhoto(){setPhoto(idx+1);}
+function prevPhoto(){setPhoto(idx-1);}
+function openLightbox(){document.getElementById('lightbox-img').src=srcs[idx];document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+</script>
+</body>
+</html>

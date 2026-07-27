@@ -760,36 +760,36 @@ h3 { color: var(--negro); }
 
     <div class="gallery">
       <!-- ▼▼▼ FOTOS PROCESO — reemplazar src cuando las tengas ▼▼▼ -->
-      <div class="gallery-item" onclick="openLightbox('assets/fotos/arroyo solis.JPG','001 — Arroyo Solís Grande')">
-        <img src="assets/fotos/arroyo solis.JPG" alt="Arroyo Solís Grande">
+      <div class="gallery-item" onclick="openLightbox('proceso recoleccion fotos/arroyo_solis.JPG','001 — Arroyo Solís Grande')">
+        <img src="proceso recoleccion fotos/arroyo_solis.JPG" alt="Arroyo Solís Grande">
         <div class="gallery-caption">001 — Arroyo Solís Grande</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('assets/fotos/playa solis.png','002 — Playa Solís')">
-        <img src="assets/fotos/playa solis.png" alt="Playa Solís">
+      <div class="gallery-item" onclick="openLightbox('proceso recoleccion fotos/playa_solis.png','002 — Playa Solís')">
+        <img src="proceso recoleccion fotos/playa_solis.png" alt="Playa Solís">
         <div class="gallery-caption">002 — Playa Solís</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('assets/fotos/las flores.png','003 — Afluente Las Flores')">
-        <img src="assets/fotos/las flores.png" alt="Afluente Las Flores">
+      <div class="gallery-item" onclick="openLightbox('proceso recoleccion fotos/las_flores.png','003 — Afluente Las Flores')">
+        <img src="proceso recoleccion fotos/las_flores.png" alt="Afluente Las Flores">
         <div class="gallery-caption">003 — Afluente Las Flores</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('assets/fotos/ruta 9.JPG','004 — Cuneta Ruta 9')">
-        <img src="assets/fotos/ruta 9.JPG" alt="Cuneta Ruta 9">
+      <div class="gallery-item" onclick="openLightbox('proceso recoleccion fotos/ruta_9.JPG','004 — Cuneta Ruta 9')">
+        <img src="proceso recoleccion fotos/ruta_9.JPG" alt="Cuneta Ruta 9">
         <div class="gallery-caption">004 — Cuneta Ruta 9</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('assets/fotos/aparicio.JPG','005 — Cañada de Aparicio')">
-        <img src="assets/fotos/aparicio.JPG" alt="Cañada de Aparicio">
+      <div class="gallery-item" onclick="openLightbox('proceso recoleccion fotos/aparicio.JPG','005 — Cañada de Aparicio')">
+        <img src="proceso recoleccion fotos/aparicio.JPG" alt="Cañada de Aparicio">
         <div class="gallery-caption">005 — Cañada de Aparicio</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('assets/fotos/laguna del sacue.JPG','008 — Laguna del Sauce')">
-        <img src="assets/fotos/laguna del sacue.JPG" alt="Laguna del Sauce">
+      <div class="gallery-item" onclick="openLightbox('proceso recoleccion fotos/laguna_del_sacue.JPG','008 — Laguna del Sauce')">
+        <img src="proceso recoleccion fotos/laguna_del_sacue.JPG" alt="Laguna del Sauce">
         <div class="gallery-caption">008 — Laguna del Sauce</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('assets/fotos/playa brava jose ignacio .JPG','007 — Playa Brava, José Ignacio')">
-        <img src="assets/fotos/playa brava jose ignacio .JPG" alt="Playa Brava">
+      <div class="gallery-item" onclick="openLightbox('proceso recoleccion fotos/playa_brava_jose_ignacio_.JPG','007 — Playa Brava, José Ignacio')">
+        <img src="proceso recoleccion fotos/playa_brava_jose_ignacio_.JPG" alt="Playa Brava">
         <div class="gallery-caption">007 — Playa Brava, José Ignacio</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox('assets/fotos/laguna garzon.JPG','006 — Laguna Garzón')">
-        <img src="assets/fotos/laguna garzon.JPG" alt="Laguna Garzón">
+      <div class="gallery-item" onclick="openLightbox('proceso recoleccion fotos/laguna_garzon.JPG','006 — Laguna Garzón')">
+        <img src="proceso recoleccion fotos/laguna_garzon.JPG" alt="Laguna Garzón">
         <div class="gallery-caption">006 — Laguna Garzón</div>
       </div>
       <!-- ▲▲▲ -->
@@ -1076,8 +1076,22 @@ document.getElementById('genForm').addEventListener('submit', e => {
     msg.classList.remove('show');
   }, 3500);
 });
-</script>
 
+/* ── LIGHTBOX ── */
+function openLightbox(src, caption) {
+  document.getElementById('lightbox-img').src = src;
+  const cap = document.getElementById('lightbox-caption');
+  if (cap) cap.textContent = caption || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+</script>
 
 <!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox()">
